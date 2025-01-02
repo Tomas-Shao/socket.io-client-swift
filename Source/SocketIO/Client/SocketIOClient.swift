@@ -263,7 +263,12 @@ open class SocketIOClient: NSObject, SocketIOClientSpec {
     open func emitWithAck(_ event: String, _ items: SocketData...) -> OnAckCallback {
         emitWithAck(event, with: items)
     }
-    
+
+    @objc
+    open func emitWithAck(_ event: String, with items: [Any]) -> OnAckCallback {
+        return createOnAck([event] + items)
+    }
+
     /// Sends a message to the server, requesting an ack.
     ///
     /// **NOTE**: It is up to the server send an ack back, just calling this method does not mean the server will ack.
