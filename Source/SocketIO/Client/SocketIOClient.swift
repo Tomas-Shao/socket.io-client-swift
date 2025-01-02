@@ -241,6 +241,25 @@ open class SocketIOClient: NSObject, SocketIOClientSpec {
         }
     }
 
+    /// Same as emit, but meant for Objective-C
+    ///
+    /// - parameter event: The event to send.
+    /// - parameter items: The items to send with this event. Send an empty array to send no data.
+    @objc
+    open func emit(_ event: String, with items: [Any]) {
+        emit([event] + items)
+    }
+
+    /// Same as emit, but meant for Objective-C
+    ///
+    /// - parameter event: The event to send.
+    /// - parameter items: The items to send with this event. Send an empty array to send no data.
+    /// - parameter completion: Callback called on transport write completion.
+    @objc
+    open func emit(_ event: String, with items: [Any], completion: (() -> ())? = nil) {
+        emit([event] + items, completion: completion)
+    }
+
     /// Sends a message to the server, requesting an ack.
     ///
     /// **NOTE**: It is up to the server send an ack back, just calling this method does not mean the server will ack.
